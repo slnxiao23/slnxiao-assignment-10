@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Image Search</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Image Search</h1>
+    </header>
+
+    <main>
+        <section>
+            <form id="searchForm" enctype="multipart/form-data">
+                <div>
+                    <label for="image_query">Image Query:</label>
+                    <input type="file" name="image_query" id="image_query">
+                </div>
+                <div>
+                    <label for="text_query">Text Query:</label>
+                    <input type="text" name="text_query" id="text_query" placeholder="Enter your text query">
+                </div>
+                <div>
+                    <label for="hybrid_weight">Hybrid Weight (λ):</label>
+                    <input type="number" name="hybrid_weight" id="hybrid_weight" min="0" max="1" step="0.1" value="0.5">
+                </div>
+                <div>
+                    <label for="query_type">Query Type:</label>
+                    <select name="query_type" id="query_type">
+                        <option value="text">Text Query</option>
+                        <option value="image">Image Query</option>
+                        <option value="hybrid">Hybrid Query</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="use_pca">Use PCA Embeddings:</label>
+                    <input type="checkbox" name="use_pca" id="use_pca">
+                </div>
+                <div id="pcaField" style="display: none;">
+                    <label for="pca_k">Number of Principal Components (k):</label>
+                    <input type="number" name="pca_k" id="pca_k" value="50" min="1" max="200">
+                </div>
+                <button type="submit">Search</button>
+            </form>
+        </section>
+
+        <section id="resultsSection" style="display: none;">
+            <h2>Search Results</h2>
+            <ul id="resultsList"></ul>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
